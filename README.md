@@ -1,4 +1,4 @@
-# Names: 
+Names: 
 - Abdulmajed Al Chekha: aboabdo@csu.fullerton.edu
 - Juli Nazzario: jnazzario@csu.fullerton.edu
 -
@@ -7,9 +7,9 @@
 ## Language used: 
 Python
 
-To run the program:
--The server is invoked as: python server.py
-  the server is set to be at port nummber 1234 always.
+## To run the program:
+### The server is invoked as: python server.py
+  The server is set to be at port nummber 1234 always.
   The ftp client is invoked as: python client.py <server machine> <server port>
     For example: python client.py localhost 1234
     <server machine> is the domain name of the server (localhost). 
