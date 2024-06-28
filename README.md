@@ -4,8 +4,7 @@ Names:
 -
 -
 -
-## Language used: 
-Python
+Language used: Python
 
 ## To run the program:
 ### The server is invoked as: python server.py
