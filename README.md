@@ -1,10 +1,10 @@
-Names: 
+# Names: 
 - Abdulmajed Al Chekha: aboabdo@csu.fullerton.edu
 - Juli Nazzario: jnazzario@csu.fullerton.edu
 -
 -
 -
-Language used: 
+## Language used: 
 Python
 
 To run the program:
@@ -19,7 +19,3 @@ To run the program:
       ftp> put <filename> (uploads file <file name> to the server)
       ftp> ls(lists files on theserver)
       ftp> quit (disconnects from the server and exits)
-    
-  The server shall be invoked as: python serv.py <PORTNUMBER>
-    <PORT NUMBER>specifies the port at which ftp server accepts connection requests.
-    For example: python serv.py 1234 
