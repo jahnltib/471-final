@@ -7,7 +7,7 @@ Names:
 Language used: Python
 
 ## To run the program:
-The server is invoked as: `python server.py`<br>  The server is set to be at port nummber 1234 always.
+The server is invoked as: `python server.py`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The server is set to be at port nummber 1234 always.
 
 The ftp client is invoked as: `python client.py <server machine> <server port>`
   For example: `python client.py localhost 1234`
