@@ -12,7 +12,7 @@ The server is invoked as: `python server.py`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 The ftp client is invoked as: `python client.py <server machine> <server port>`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For example: `python client.py localhost 1234`
 <server machine> is the domain name of the server (localhost). 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<server port> is the port number of server (1234)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <server port> is the port number of server (1234)
     
 Upon connecting to the server, the client prints out ftp>, which allows the user to execute the following commands:  
       ftp> get <filename> (downloads file <file name> from the server)
