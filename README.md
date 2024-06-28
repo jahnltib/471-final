@@ -15,7 +15,7 @@ The ftp client is invoked as: `python client.py <server machine> <server port>`
 <server port> is the port number of server (1234)
     
 Upon connecting to the server, the client prints out ftp>, which allows the user to execute the following commands:  
-      ftp> get <filename> (downloads file <file name> from the server)
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ftp> get <filename> (downloads file <file name> from the server)
       ftp> put <filename> (uploads file <file name> to the server)
       ftp> ls(lists files on theserver)
       ftp> quit (disconnects from the server and exits)
