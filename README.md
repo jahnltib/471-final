@@ -11,8 +11,7 @@ The server is invoked as: python server.py
     The server is set to be at port nummber 1234 always.
   
   The ftp client is invoked as: `python client.py <server machine> <server port>`
-    
-    For example: python client.py localhost 1234
+  ```For example: python client.py localhost 1234
     <server machine> is the domain name of the server (localhost). 
     <server port> is the port number of server (1234)
     
