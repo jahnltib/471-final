@@ -2,29 +2,29 @@ import socket
 import sys
 import os
 
-# For use in put command
-def send_file(socket, file_name):
-    # Open the file in binary mode
-    with open(file_name, "rb") as file_obj:
-        # Read file data
-        while chunk := file_obj.read(1234):
+def send_file(socket, filename):
+    with open(filename, "rb") as file_obj:
+        while chunk := file_obj.read(1024):
             socket.sendall(chunk)
 
-# For use in get command
-def receive_file(socket, file_name):
-    with open(file_name, "wb") as file_obj:
+def receive_file(socket, filename):
+    with open(filename, "wb") as file_obj:
         while True:
-            chunk = socket.recv(1234)
+            chunk = socket.recv(1024)
             if not chunk:
                 break
             file_obj.write(chunk)
-# For use in get & put commands
+
 def setup_data_connection(control_socket):
-    port_response = control_socket.recv(1234).decode()
+    port_response = control_socket.recv(1024).decode()
     port = int(port_response.split()[1])
     data_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     data_socket.connect((control_socket.getpeername()[0], port))
     return data_socket
+
+# Command prompt
+def ftp_prompt():
+    print("ftp>", end=" ", flush=True)
 
 # Command line argument check
 if len(sys.argv) != 3:
@@ -39,54 +39,58 @@ server_port = int(sys.argv[2])
 command_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 command_socket.connect((server_ip, server_port))
 
-print("Connected to server.")
+if command_socket:
+    print("Connected to server.")
+else:
+    print("Connection unsuccessful.")
+    sys.exit(1)
 
-# Main loop communicates commands to the server
+# print first ftp> prompt
+ftp_prompt()
+
+# Main loop to communicate user input with server
 while True:
-    # Capture user input
-    user_input = input("ftp> ").strip()
-    
-    # Send command to server
+    user_input = input().strip()
     command_socket.sendall(user_input.encode())
     
-    # Quit
     if user_input.lower() == "quit":
         break
-    
-    # Get command (download file)
+    # get command
     elif user_input.startswith("get"):
         file_name = user_input.split()[1]
-        response = command_socket.recv(1234).decode()
+        response = command_socket.recv(1024).decode()
         if response == "SUCCESS":
             data_socket = setup_data_connection(command_socket)
-            receive_file(command_socket, file_name)
-            command_socket.close()
+            receive_file(data_socket, file_name)
+            data_socket.close()
             print(f"{file_name} downloaded successfully.")
         else:
             print(response)
-    # Put command (upload file)
+    # put command
     elif user_input.startswith("put"):
         file_name = user_input.split()[1]
         if not os.path.isfile(file_name):
             print("File not found.")
+            ftp_prompt()
             continue
-        response = command_socket.recv(1234).decode()
+        response = command_socket.recv(1024).decode()
         if response == "SUCCESS":
-            command_socket = setup_data_connection(command_socket)
-            send_file(command_socket, file_name)
-            command_socket.close()
+            data_socket = setup_data_connection(command_socket)
+            send_file(data_socket, file_name)
+            data_socket.close()
             print(f"{file_name} uploaded successfully.")
         else:
             print(response)
-    # lists files
+    # prints out a list of all files
     elif user_input == "ls":
-        response = command_socket.recv(1234).decode()
+        response = command_socket.recv(1024).decode()
         if response.startswith("LIST"):
             files = response[5:]
-            print("Files on server:")
-            print(files)
+            print(f"Files on server: {files}")
         else:
             print(response)
+    
+    ftp_prompt()
 
 # Close command channel connection
 command_socket.close()
